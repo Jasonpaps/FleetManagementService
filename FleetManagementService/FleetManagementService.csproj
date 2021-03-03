@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\Helpers\ListHelper.cs" />
     <Compile Include="Controllers\ContainersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VesselController.cs" />
@@ -186,10 +187,13 @@
     <Content Include="Views\Containers\Create.cshtml" />
     <Content Include="Views\Containers\Details.cshtml" />
     <Content Include="Views\Containers\Edit.cshtml" />
+    <Content Include="Views\Vessel\Create.cshtml" />
+    <Content Include="Views\Vessel\Details.cshtml" />
+    <Content Include="Views\Vessel\Edit.cshtml" />
+    <Content Include="Views\Vessel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Vessel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

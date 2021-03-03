@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FleetManagementService.Models;
+using FleetManagementService.Models.Repositories;
 
 namespace FleetManagementService.Controllers
 {
     public class VesselController : Controller
     {
         //FMSDataContext context = new FMSDataContext();
-        VesselController repository = new VesselController();
+        VesselRepository repository = new VesselRepository();
 
         public ActionResult Details(int id)
         {
@@ -21,7 +22,7 @@ namespace FleetManagementService.Controllers
             }
             else
             {
-                return View(container);
+                return View(vessel);
             }
         }
 
@@ -37,28 +38,28 @@ namespace FleetManagementService.Controllers
         }
 
         [HttpPost()]
-        public ActionResult Create(Container container)
+        public ActionResult Create(Vessel vessel)
         {
-            if (!ModelState.IsValid) return View(container);
+            if (!ModelState.IsValid) return View(vessel);
 
-            repository.Add(container);
+            repository.Add(vessel);
             repository.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            var container = repository.Get(id);
-            if (container == null) return HttpNotFound();
-            else return View();
+            var vessel = repository.Get(id);
+            if (vessel == null) return HttpNotFound();
+            else return View(vessel);
         }
 
         [HttpPost()]
-        public ActionResult Edit(Container container)
+        public ActionResult Edit(Vessel vessel)
         {
-            if (!ModelState.IsValid) return View(container);
+            if (!ModelState.IsValid) return View(vessel);
 
-            repository.Update(container);
+            repository.Update(vessel);
             repository.SaveChanges();
             return RedirectToAction("Index");
         }

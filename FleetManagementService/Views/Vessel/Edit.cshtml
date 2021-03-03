@@ -1,12 +1,7 @@
-﻿@model FleetManagementService.Models.Container
+﻿@model FleetManagementService.Models.Vessel
 
 @{
     ViewBag.Title = "Edit";
-    List<SelectListItem> l1 = new List<SelectListItem>();
-    l1.Add(new SelectListItem() { Text = "Apple", Value = "20" });
-    l1.Add(new SelectListItem() { Text = "Mango", Value = "30" });
-    l1.Add(new SelectListItem() { Text = "Grapes", Value = "40" });
-    l1.Add(new SelectListItem() { Text = "Orange", Value = "50" });
 }
 
 <h2>Edit</h2>
@@ -17,24 +12,16 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Container</h4>
+        <h4>Vessel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ContainerId)
+        @Html.HiddenFor(model => model.VesselId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.VesselId, "VesselId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("VesselId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VesselId, "", new { @class = "text-danger" })
             </div>
         </div>
 
