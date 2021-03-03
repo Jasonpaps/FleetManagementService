@@ -10,7 +10,7 @@ namespace FleetManagementService.Models.Repositories
     public class Repository<T> where T : class
     {
         private bool disposed = false;
-        private FMSDataContext context = null;
+        private FMSDataContext context = new FMSDataContext();
         protected DbSet<T> DbSet
         {
             get; set;

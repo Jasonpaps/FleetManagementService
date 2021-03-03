@@ -2,11 +2,6 @@
 
 @{
     ViewBag.Title = "Edit";
-    List<SelectListItem> l1 = new List<SelectListItem>();
-    l1.Add(new SelectListItem() { Text = "Apple", Value = "20" });
-    l1.Add(new SelectListItem() { Text = "Mango", Value = "30" });
-    l1.Add(new SelectListItem() { Text = "Grapes", Value = "40" });
-    l1.Add(new SelectListItem() { Text = "Orange", Value = "50" });
 }
 
 <h2>Edit</h2>
@@ -33,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VesselId, "VesselId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList(x => x.VesselId, Model.Vessel, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("VesselId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VesselId, "", new { @class = "text-danger" })
             </div>
         </div>

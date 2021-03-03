@@ -11,5 +11,10 @@ namespace FleetManagementService.Models.Repositories
         {
             return DbSet.Where(a => a.Name.Contains(name)).ToList();
         }
+
+        public List<Container> GetContainerWithVessels()
+        {
+
+        }
     }
 }
