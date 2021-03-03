@@ -127,10 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Helpers\ListHelper.cs" />
-    <Compile Include="Controllers\Containers1Controller.cs" />
     <Compile Include="Controllers\ContainersController.cs" />
+    <Compile Include="Controllers\FleetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\VesselController.cs" />
+    <Compile Include="Controllers\VesselsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\Fleet.cs" />
     <Compile Include="Models\FMSDataContext.cs" />
     <Compile Include="Models\FMSDataContextInitializer.cs" />
     <Compile Include="Models\Repositories\ContainerRepository.cs" />
@@ -184,19 +185,21 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Containers\Index.cshtml" />
     <Content Include="Views\Containers\Create.cshtml" />
+    <Content Include="Views\Containers\Delete.cshtml" />
     <Content Include="Views\Containers\Details.cshtml" />
     <Content Include="Views\Containers\Edit.cshtml" />
-    <Content Include="Views\Vessel\Create.cshtml" />
-    <Content Include="Views\Vessel\Details.cshtml" />
-    <Content Include="Views\Vessel\Edit.cshtml" />
-    <Content Include="Views\Vessel\Index.cshtml" />
-    <Content Include="Views\Containers1\Create.cshtml" />
-    <Content Include="Views\Containers1\Delete.cshtml" />
-    <Content Include="Views\Containers1\Details.cshtml" />
-    <Content Include="Views\Containers1\Edit.cshtml" />
-    <Content Include="Views\Containers1\Index.cshtml" />
+    <Content Include="Views\Containers\Index.cshtml" />
+    <Content Include="Views\Fleets\Create.cshtml" />
+    <Content Include="Views\Fleets\Delete.cshtml" />
+    <Content Include="Views\Fleets\Details.cshtml" />
+    <Content Include="Views\Fleets\Edit.cshtml" />
+    <Content Include="Views\Fleets\Index.cshtml" />
+    <Content Include="Views\Vessels\Create.cshtml" />
+    <Content Include="Views\Vessels\Delete.cshtml" />
+    <Content Include="Views\Vessels\Details.cshtml" />
+    <Content Include="Views\Vessels\Edit.cshtml" />
+    <Content Include="Views\Vessels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

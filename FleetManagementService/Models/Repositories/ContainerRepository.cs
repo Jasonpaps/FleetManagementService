@@ -7,14 +7,12 @@ namespace FleetManagementService.Models.Repositories
 {
     public class ContainerRepository :Repository<Container>
     {
+
         public List<Container> GetByName(string name)
         {
             return DbSet.Where(a => a.Name.Contains(name)).ToList();
         }
 
-        public List<Container> GetContainerWithVessels()
-        {
 
-        }
     }
 }

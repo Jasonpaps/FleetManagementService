@@ -11,6 +11,8 @@ namespace FleetManagementService.Models
         public DbSet<Container> Containers { get; set; }
 
         public DbSet<Vessel> Vessels { get; set; }
+
+        public System.Data.Entity.DbSet<FleetManagementService.Models.Fleet> Fleets { get; set; }
     }
 
 }

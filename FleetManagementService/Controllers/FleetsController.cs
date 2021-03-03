@@ -10,112 +10,107 @@ using FleetManagementService.Models;
 
 namespace FleetManagementService.Controllers
 {
-    public class ContainersController : Controller
+    public class FleetsController : Controller
     {
         private FMSDataContext db = new FMSDataContext();
 
-        // GET: Containers
+        // GET: Fleets
         public ActionResult Index()
         {
-            var containers = db.Containers.Include(c => c.Vessel);
-            return View(containers.ToList());
+            return View(db.Fleets.ToList());
         }
 
-        // GET: Containers/Details/5
+        // GET: Fleets/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Container container = db.Containers.Find(id);
-            if (container == null)
+            Fleet fleet = db.Fleets.Find(id);
+            if (fleet == null)
             {
                 return HttpNotFound();
             }
-            return View(container);
+            return View(fleet);
         }
 
-        // GET: Containers/Create
+        // GET: Fleets/Create
         public ActionResult Create()
         {
-            ViewBag.VesselId = new SelectList(db.Vessels, "VesselId", "Name");
             return View();
         }
 
-        // POST: Containers/Create
+        // POST: Fleets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContainerId,Name,VesselId")] Container container)
+        public ActionResult Create([Bind(Include = "FleetId,Name")] Fleet fleet)
         {
             if (ModelState.IsValid)
             {
-                db.Containers.Add(container);
+                db.Fleets.Add(fleet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.VesselId = new SelectList(db.Vessels, "VesselId", "Name", container.VesselId);
-            return View(container);
+            return View(fleet);
         }
 
-        // GET: Containers/Edit/5
+        // GET: Fleets/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Container container = db.Containers.Find(id);
-            if (container == null)
+            Fleet fleet = db.Fleets.Find(id);
+            if (fleet == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.VesselId = new SelectList(db.Vessels, "VesselId", "Name", container.VesselId);
-            return View(container);
+            return View(fleet);
         }
 
-        // POST: Containers/Edit/5
+        // POST: Fleets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContainerId,Name,VesselId")] Container container)
+        public ActionResult Edit([Bind(Include = "FleetId,Name")] Fleet fleet)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(container).State = EntityState.Modified;
+                db.Entry(fleet).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.VesselId = new SelectList(db.Vessels, "VesselId", "Name", container.VesselId);
-            return View(container);
+            return View(fleet);
         }
 
-        // GET: Containers/Delete/5
+        // GET: Fleets/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Container container = db.Containers.Find(id);
-            if (container == null)
+            Fleet fleet = db.Fleets.Find(id);
+            if (fleet == null)
             {
                 return HttpNotFound();
             }
-            return View(container);
+            return View(fleet);
         }
 
-        // POST: Containers/Delete/5
+        // POST: Fleets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Container container = db.Containers.Find(id);
-            db.Containers.Remove(container);
+            Fleet fleet = db.Fleets.Find(id);
+            db.Fleets.Remove(fleet);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
