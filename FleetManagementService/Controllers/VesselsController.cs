@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +18,8 @@ namespace FleetManagementService.Controllers
         // GET: Vessels
         public ActionResult Index()
         {
-            return View(db.Vessels.ToList());
+            var vessels = db.Vessels.Include(v => v.Fleet);
+            return View(vessels.ToList());
         }
 
         // GET: Vessels/Details/5
@@ -38,6 +40,7 @@ namespace FleetManagementService.Controllers
         // GET: Vessels/Create
         public ActionResult Create()
         {
+            ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name");
             return View();
         }
 
@@ -46,8 +49,20 @@ namespace FleetManagementService.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VesselId,Name")] Vessel vessel)
+        public ActionResult Create([Bind(Include = "VesselId,Name,Capacity,FleetId,NoFleet")] Vessel vessel)
         {
+            int duplicateCount = db.Vessels.Where(a => a.Name.Equals(vessel.Name)).Count();
+            if (duplicateCount != 0)
+            {
+                ViewBag.Message = vessel.Name + " is already taken. Please use a different vessel name.";
+                ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name", vessel.FleetId);
+                return View(vessel);
+            }
+            if (vessel.NoFleet == true)
+            {
+                vessel.FleetId = null;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Vessels.Add(vessel);
@@ -55,6 +70,7 @@ namespace FleetManagementService.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name", vessel.FleetId);
             return View(vessel);
         }
 
@@ -70,6 +86,7 @@ namespace FleetManagementService.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name", vessel.FleetId);
             return View(vessel);
         }
 
@@ -78,14 +95,30 @@ namespace FleetManagementService.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VesselId,Name")] Vessel vessel)
+        public ActionResult Edit([Bind(Include = "VesselId,Name,Capacity,FleetId,NoFleet")] Vessel vessel)
         {
+            Vessel selectedVessel = db.Vessels.Find(vessel.VesselId);
+
+            int duplicateCount = db.Vessels.Where(a => a.Name.Equals(vessel.Name)).Count();
+            if ((duplicateCount != 0) && (selectedVessel.Name != vessel.Name))
+            {
+                ViewBag.Message = vessel.Name + " is already taken. Please use a different vessel name.";
+                ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name", vessel.FleetId);
+                return View(vessel);
+            }
+            if (vessel.NoFleet == true)
+            {
+                vessel.FleetId = null;
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(vessel).State = EntityState.Modified;
+                //db.Entry(vessel).State = EntityState.Modified;
+                db.Set<Vessel>().AddOrUpdate(vessel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name", vessel.FleetId);
             return View(vessel);
         }
 
@@ -110,6 +143,15 @@ namespace FleetManagementService.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Vessel vessel = db.Vessels.Find(id);
+            int containerCount = vessel.Containers.Count();
+            if (containerCount != 0)
+            {
+                ViewBag.Message = vessel.Name + " has containers assigned to it. Please remove them before deleting the Vessel.";
+                ViewBag.FleetId = new SelectList(db.Fleets, "FleetId", "Name", vessel.FleetId);
+                return View(vessel);
+            }
+                // IEnumerable<Container> containersDel = db.Containers.Where(m =>m.VesselId==id);
+
             db.Vessels.Remove(vessel);
             db.SaveChanges();
             return RedirectToAction("Index");

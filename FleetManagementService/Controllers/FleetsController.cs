@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,6 +49,13 @@ namespace FleetManagementService.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FleetId,Name")] Fleet fleet)
         {
+            int duplicateCount = db.Fleets.Where(a => a.Name.Equals(fleet.Name)).Count();
+            if (duplicateCount != 0)
+            {
+                ViewBag.Message = fleet.Name + " is already taken. Please use a different fleet name.";
+                return View(fleet);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Fleets.Add(fleet);
@@ -80,9 +88,19 @@ namespace FleetManagementService.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "FleetId,Name")] Fleet fleet)
         {
+            Fleet selectedFleet = db.Fleets.Find(fleet.FleetId);
+
+            int duplicateCount = db.Fleets.Where(a => a.Name.Equals(fleet.Name)).Count();
+            if ((duplicateCount != 0) && (selectedFleet.Name != fleet.Name))
+            {
+                ViewBag.Message = fleet.Name + " is already taken. Please use a different fleet name.";
+                return View(fleet);
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(fleet).State = EntityState.Modified;
+                //db.Entry(fleet).State = EntityState.Modified;
+                db.Set<Fleet>().AddOrUpdate(fleet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -110,6 +128,12 @@ namespace FleetManagementService.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Fleet fleet = db.Fleets.Find(id);
+            int vesselCount = fleet.Vessels.Count();
+            if (vesselCount != 0)
+            {
+                ViewBag.Message = fleet.Name + " has containers assigned to it. Please remove them before deleting the Vessel.";
+                return View(fleet);
+            }
             db.Fleets.Remove(fleet);
             db.SaveChanges();
             return RedirectToAction("Index");

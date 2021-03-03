@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FleetManagementService.Models
 {
@@ -12,7 +13,8 @@ namespace FleetManagementService.Models
         public int FleetId { get; set; }
 
         [Required()]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(30)]
+        [Index("Ix_Name", Order = 1, IsUnique = true)]
         public string Name { get; set; }
 
         public virtual ICollection<Vessel> Vessels { get; set; }

@@ -5,12 +5,16 @@
 }
 
 <h2>Edit</h2>
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <h3 style="color:red">@ViewBag.Message</h3>
+}
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Fleet</h4>
         <hr />

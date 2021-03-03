@@ -12,7 +12,22 @@ namespace FleetManagementService.Models
 
         public DbSet<Vessel> Vessels { get; set; }
 
-        public System.Data.Entity.DbSet<FleetManagementService.Models.Fleet> Fleets { get; set; }
+        public DbSet<Fleet> Fleets { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //modelBuilder.Entity<Container>()
+        //    //    .HasOptional<Vessel>(c => c.Vessel)
+        //    //    .WithMany(v => v.Containers)
+        //    //    .HasForeignKey(c => c.VesselId);
+        //    ////.WillCascadeOnDelete(false);
+
+        //    modelBuilder.Entity<Vessel>()
+        //        .HasMany(v => v.Containers)
+        //        .WithOptional(c => c.Vessel)
+        //        .HasForeignKey(c => c.VesselId)
+        //        .WillCascadeOnDelete(false);
+        //}
     }
 
 }

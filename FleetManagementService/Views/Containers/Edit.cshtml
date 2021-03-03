@@ -5,12 +5,17 @@
 }
 
 <h2>Edit</h2>
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <h3 style="color:red">@ViewBag.Message</h3>
+}
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Container</h4>
         <hr />
@@ -30,6 +35,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("VesselId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VesselId, "", new { @class = "text-danger" })
+                @Html.CheckBoxFor(m => m.NoVessel, false) No Vessel
             </div>
         </div>
 
