@@ -9,6 +9,7 @@ namespace FleetManagementService.Models.Repositories
 {
     public class Repository<T> where T : class
     {
+        private bool disposed = false;
         private FMSDataContext context = null;
         protected DbSet<T> DbSet
         {
@@ -41,9 +42,28 @@ namespace FleetManagementService.Models.Repositories
             DbSet.Add(entity);
         }
 
+        public void Update(T entity)
+        {
+            context.Entry<T>(entity).State = EntityState.Modified;
+        }
+
+        public void Delete(int id)
+        {
+            DbSet.Remove(DbSet.Find(id));
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            if (!disposed)
+            {
+                context.Dispose();
+                disposed = true;
+            }
         }
     }
 }

@@ -9,8 +9,7 @@ namespace FleetManagementService.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "FleetManagementService.Models.FMSDataContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(FleetManagementService.Models.FMSDataContext context)

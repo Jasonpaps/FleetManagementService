@@ -13,7 +13,7 @@ namespace FleetManagementService.Models
             Vessel vessel = new Vessel() { Name = "Vessel1" };
             context.Vessels.Add(vessel);
 
-            Container container1 = new Container() { Name = "Container1", Vessel = vessel };
+            Container container1 = new Container() { Name = "Container1" , Vessel = vessel };
             Container container2 = new Container() { Name = "Container2", Vessel = vessel };
 
             context.Containers.Add(container1);

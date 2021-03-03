@@ -4,19 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FleetManagementService.Models;
-using FleetManagementService.Models.Repositories;
 
 namespace FleetManagementService.Controllers
 {
-    public class ContainersController : Controller
+    public class VesselController : Controller
     {
         //FMSDataContext context = new FMSDataContext();
-        ContainerRepository repository = new ContainerRepository();
+        VesselController repository = new VesselController();
 
         public ActionResult Details(int id)
         {
-            Container container = repository.Get(id);
-            if (container == null)
+            Vessel vessel = repository.Get(id);
+            if (vessel == null)
             {
                 return HttpNotFound();
             }
