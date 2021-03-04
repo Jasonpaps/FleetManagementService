@@ -10,3 +10,4 @@ The user can assign the vessels into different fleets by editing the correspondi
 Fleet: The user has the ability to create a fleet by giving it a name.At any point the user can Edit, Delete or review the Details of existing Fleets. 
 Each fleet must have a unique name. The Fleet cannot be deleted if there are Vessels assigned to it.
 
+The platform works on MSSQLLocalDB. Sample instances are initialized the first time the platform runs.
