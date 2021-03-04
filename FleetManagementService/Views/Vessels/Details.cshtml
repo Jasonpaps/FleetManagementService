@@ -11,15 +11,8 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Fleet.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fleet.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Name:
         </dt>
 
         <dd>
@@ -27,12 +20,34 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Capacity)
+            @*@Html.DisplayNameFor(model => model.Fleet.Name)*@
+            Fleet:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fleet.Name)
+        </dd>
+
+
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Capacity)*@
+            Capacity:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Capacity)
         </dd>
+
+        <dt>
+            Containers:
+        </dt>
+
+                @foreach(var container in Model.Containers)
+                {
+                    <dd>@container.Name</dd>
+                }
+
 
     </dl>
 </div>

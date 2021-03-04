@@ -2,13 +2,13 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+@*<div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+</div>*@
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
@@ -28,4 +28,16 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
+</div>*@
+
+<div>
+    <h2> Read Me Instructions</h2>
+    Use the Navigation bar to access the three entities: Containers, Vessels, Fleets.
+    <ul>
+        <li><b>Container:</b> The user has the ability to create a container by giving a name and assigning it to the corresponding vessel if there is one. At any point the user can Edit, Delete or review the Details of existing containers. <br /> The user is able to make load transfers between the vessels by editing the given container and assigning it to a different Vessel. The target Vessel must have free space in order to make the transfer. <br /> Each Container must have a unique name. </li>
+        <li><b>Vessel:</b> The user has the ability to create a vessel by giving it a name, defining how many containers it fits and assigning it to a Fleet if there is one. At any point the user can Edit, Delete or review the Details of existing Vesels.<br /> The user can assign the vessels into different fleets by editing the corresponding Vessel.  <br /> Each Vessel must have a unique name. The Vessel cannot be deleted if there are containers assigned to it. </li>
+        <li> <b>Fleet:</b> The user has the ability to create a fleet by giving it a name.At any point the user can Edit, Delete or review the Details of existing Fleets. <br /> Each fleet must have a unique name. The Fleet cannot be deleted if there are Vessels assigned to it. </li>
+    </ul>
+    The platform works on MSSQLLocalDB. Sample instances are initialized the first time the platform runs.
+
 </div>

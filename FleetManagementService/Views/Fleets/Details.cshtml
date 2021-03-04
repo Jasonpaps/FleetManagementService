@@ -11,14 +11,23 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Name:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
 
-    </dl>
+        <dt>
+            Vessels:
+        </dt>
+
+            @foreach (var vessel in Model.Vessels)
+            {
+            <dd>@vessel.Name</dd>
+            }
+        </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.FleetId }) |

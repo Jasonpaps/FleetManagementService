@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FleetManagementService.Models
 {
-    public class FMSDataContextInitializer : DropCreateDatabaseAlways<FMSDataContext>
+    public class FMSDataContextInitializer : CreateDatabaseIfNotExists<FMSDataContext> /*DropCreateDatabaseAlways<FMSDataContext>*/
     {
         protected override void Seed(FMSDataContext context)
         {

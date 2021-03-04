@@ -18,6 +18,7 @@ namespace FleetManagementService.Models
         public string Name { get; set; }
 
         [Required()]
+        [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
         public int Capacity { get; set; }
 
         public virtual ICollection<Container> Containers { get; set; }

@@ -11,20 +11,24 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Vessel.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Name:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Vessel.Name)*@
+            Vessel:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Vessel.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
 
     </dl>
 </div>
